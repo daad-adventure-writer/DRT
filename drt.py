@@ -137,7 +137,10 @@ else:
   progreso = progressbar.ProgressBar()
   rango    = progreso (range (3, 30))
 for maxAbrev in rango:
-  (posibles, longAbrev) = calcula_abreviaturas (maxAbrev, list(textos))
+  try:
+    (posibles, longAbrev) = calcula_abreviaturas (maxAbrev, list (textos))
+  except KeyboardInterrupt:
+    break
   if longAbrev < longMin:
     abreviaturas = posibles  # Conjunto de abreviaturas que produjo la máxima reduccíón
     longMin      = longAbrev  # Reducción máxima de longitud total de textos lograda
