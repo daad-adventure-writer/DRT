@@ -166,7 +166,7 @@ salidaJson = {
   'compression': 'advanced',
   'tokens': hexadecimales,
 } 
-if len (sys.argv) < 3:
+if len (sys.argv) < 3 or (len (sys.argv) == 3 and sys.argv[2] == '-v'):
   print (json.dumps (salidaJson))
 else:
   fichero = open (sys.argv[2], 'w')
