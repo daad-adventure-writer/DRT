@@ -34,22 +34,7 @@ def calcula_abreviaturas (maxAbrev, textos):
   optimas = []  # Abreviaturas óptimas calculadas
   for i in range (num_abreviaturas):
     # Calculamos cuántas veces aparece cada combinación
-    ahorros     = {}  # Cuántos bytes en total se ahorrarían por abreviar cada ocurrencia
-    ocurrencias = {}  # Cuántas veces aparece cada combinación de caracteres
-    for cadena in cadenas:
-      longCadena = len (cadena)
-      if longCadena < minAbrev:
-        continue
-      for pos in range (0, (longCadena - minAbrev) + 1):
-        for longAbrev in range (minAbrev, min (maxAbrev, longCadena - pos) + 1):
-          ahorro     = longAbrev - 1
-          ocurrencia = cadena[pos:pos + longAbrev]
-          if ocurrencia in ocurrencias:
-            ahorros[ocurrencia]     += ahorro
-            ocurrencias[ocurrencia] += 1
-          else:
-            ahorros[ocurrencia]     = 0  # No se ahorra ni desperdicia nada
-            ocurrencias[ocurrencia] = 1
+    (ahorros, ocurrencias) = cuenta_ocurrencias (cadenas, minAbrev, maxAbrev)
     if not ahorros:  # Ya no hay más cadenas de longitud mínima
       break
     ordenAhorro = sorted(ahorros, key = ahorros.get, reverse = True)
@@ -105,6 +90,26 @@ def calcula_abreviaturas (maxAbrev, textos):
   for abreviatura in optimas:
     nuevasAbreviaturas.append (abreviatura[0])
   return (nuevasAbreviaturas, longDespues)
+
+# Devuelve cuántas veces aparece cada combinación de caracteres en las cadenas dadas, y cuánto se ahorraría por abreviar cada una de ellas
+def cuenta_ocurrencias (cadenas, minAbrev, maxAbrev):
+  ahorros     = {}  # Cuántos bytes en total se ahorrarían por abreviar cada ocurrencia
+  ocurrencias = {}  # Cuántas veces aparece cada combinación de caracteres
+  for cadena in cadenas:
+    longCadena = len (cadena)
+    if longCadena < minAbrev:
+      continue
+    for pos in range (0, (longCadena - minAbrev) + 1):
+      for longAbrev in range (minAbrev, min (maxAbrev, longCadena - pos) + 1):
+        ahorro     = longAbrev - 1
+        ocurrencia = cadena[pos:pos + longAbrev]
+        if ocurrencia in ocurrencias:
+          ahorros[ocurrencia]     += ahorro
+          ocurrencias[ocurrencia] += 1
+        else:
+          ahorros[ocurrencia]     = 0  # No se ahorra ni desperdicia nada
+          ocurrencias[ocurrencia] = 1
+  return (ahorros, ocurrencias)
 
 
 if len (sys.argv) < 2 or (len (sys.argv) == 2 and sys.argv[1][0] == '-'):
