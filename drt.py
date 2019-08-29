@@ -161,8 +161,8 @@ abreviaturas = [chr (127)] + abreviaturas  # Hay que dejar eso como la primera a
 hexadecimales = []
 for abreviatura in abreviaturas:
   hexadecimal = ''
-  for c in abreviatura:
-    hexadecimal += hex (ord (c))[2:]
+  for caracter in abreviatura:
+    hexadecimal += hex (ord (caracter))[2:].zfill (2)
   hexadecimales.append (hexadecimal)
 
 salidaJson = {
