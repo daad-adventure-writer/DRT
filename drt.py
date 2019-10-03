@@ -41,7 +41,7 @@ def calcula_abreviaturas (maxAbrev, textos):
     (ahorros, ocurrencias) = cuenta_ocurrencias (cadenas, minAbrev, maxAbrev)
     if not ahorros:  # Ya no hay más cadenas de longitud mínima
       break
-    ordenAhorro = sorted(ahorros, key = ahorros.get, reverse = True)
+    ordenAhorro = sorted (ahorros, key = ahorros.get, reverse = True)
     abreviatura = ordenAhorro[0]
     ahorro      = ahorros[abreviatura]
     # print ((abreviatura, ahorro, ocurrencias[abreviatura]))
@@ -62,20 +62,20 @@ def calcula_abreviaturas (maxAbrev, textos):
             # print ('"%s" (%d) es superconjunto de "%s", ahorros %d, ocurrencias %d. Ahorros combinados tomando éste %d' %
             #     (sconjto, d, abreviatura, ahorros[sconjto], ocurrencias[sconjto], ahorroSup))
     if posMaxAhorro:  # Tenía algún superconjunto (TODO: puede que siempre ocurra, si len (abreviatura) < maxAbrev)
-      # print ('La entrada "' + ordenAhorro[posMaxAhorro] + '" (' + str(posMaxAhorro) + ') reemplaza "' + abreviatura + '" (0)')
+      # print ('La entrada "' + ordenAhorro[posMaxAhorro] + '" (' + str (posMaxAhorro) + ') reemplaza "' + abreviatura + '" (0)')
       abreviatura = maxSuperCjto
     if maxAhorroSup < 1:
       break  # Ya no se ahorra nada más
     # Añadimos esta abreviatura a la lista de abreviaturas óptimas calculadas
     ahorro = ahorros[abreviatura]
     # print ((abreviatura, ahorro, ocurrencias[abreviatura]))
-    optimas.append((abreviatura, ahorro, ocurrencias[abreviatura]))
+    optimas.append ((abreviatura, ahorro, ocurrencias[abreviatura]))
     longDespues += len (abreviatura)
     # Quitamos las ocurrencias de esta abreviatura en las cadenas
     c = 0
     nuevasCadenas = []
     while c < len (cadenas):
-      partes = cadenas[c].split(abreviatura)
+      partes = cadenas[c].split (abreviatura)
       if len (partes) > 1:  # La abreviatura aparecía en esa cadena
         cadenas[c] = partes[0]
         for p in range (1, len (partes)):
@@ -89,7 +89,7 @@ def calcula_abreviaturas (maxAbrev, textos):
     longDespues += num_abreviaturas - len (optimas)  # Se reemplazarán por abreviaturas de un byte
   if prolijo:
     print ('Con longitud m\xc3\xa1xima de las abreviaturas %d, longitud de cadenas tras abreviar: %d.' % (maxAbrev, longDespues))
-  # print (optimas)
+    # print (optimas)
   nuevasAbreviaturas = []
   for abreviatura in optimas:
     nuevasAbreviaturas.append (abreviatura[0])
@@ -159,7 +159,7 @@ print()
 
 # Ponemos abreviaturas de relleno
 for i in range (len (abreviaturas), num_abreviaturas):
-  abreviaturas.append(chr (127))
+  abreviaturas.append (chr (127))
 abreviaturas = [chr (127)] + abreviaturas  # Hay que dejar eso como la primera abreviatura
 
 hexadecimales = []
