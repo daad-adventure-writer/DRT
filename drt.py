@@ -7,7 +7,7 @@
 #
 # Released under the GPL v2 license
 #
-# Requires Python 2, optionally with progressbar module
+# Requires Python 2.6+, optionally with progressbar module
 
 from __future__ import print_function
 import json
@@ -24,7 +24,10 @@ num_abreviaturas = 128  # Número máximo de abreviaturas a encontrar
 
 # Tabla de conversión de caracteres, posiciones 16-31 (inclusive)
 daad_a_chr = ('ª', '¡', '¿', '«', '»', 'á', 'é', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'ç', 'Ç', 'ü', 'Ü')
-daad_a_chr = [c.decode ('utf8') for c in daad_a_chr]
+if sys.version_info[0] < 3:  # Python 2
+  daad_a_chr = [c.decode ('utf8') for c in daad_a_chr]
+else:
+  daad_a_chr = [bytes (c, 'iso-8859-15').decode() for c in daad_a_chr]
 
 
 # Calcula y devuelve las abreviaturas óptimas, y la longitud de las cadenas tras aplicarse
@@ -122,8 +125,12 @@ if len (sys.argv) < 2 or (len (sys.argv) == 2 and sys.argv[1][0] == '-'):
 
 prolijo = sys.argv[-1] == '-v'
 
-fichero = open (sys.argv[1], 'r')
-jsonBD  = json.load (fichero, encoding = 'iso-8859-1')
+if sys.version_info[0] < 3:  # Python 2
+  fichero = open (sys.argv[1], 'r')
+  jsonBD  = json.load (fichero, encoding = 'iso-8859-1')
+else:
+  fichero = open (sys.argv[1], 'r', encoding = 'iso-8859-1')
+  jsonBD  = json.load (fichero)
 fichero.close()
 longAntes = 0    # Longitud total de los textos antes de abreviar
 textos    = []   # Cadenas sobre las que aplicar abreviaturas
