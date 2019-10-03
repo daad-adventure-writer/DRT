@@ -2,8 +2,8 @@
 # -*- coding: iso-8859-15 -*-
 
 # DAAD Reborn Tokenizer
-# Version 0.1 alpha
-# Copyright (C) 2018-2019 José Manuel Ferrer Ortiz
+# Version 0.2 alpha
+# Copyright (C) 2010, 2013, 2018-2019 José Manuel Ferrer Ortiz
 #
 # Released under the GPL v2 license
 #
@@ -21,6 +21,10 @@ except:
 
 
 num_abreviaturas = 128  # Número máximo de abreviaturas a encontrar
+
+# Tabla de conversión de caracteres, posiciones 16-31 (inclusive)
+daad_a_chr = ('ª', '¡', '¿', '«', '»', 'á', 'é', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'ç', 'Ç', 'ü', 'Ü')
+daad_a_chr = [c.decode ('utf8') for c in daad_a_chr]
 
 
 # Calcula y devuelve las abreviaturas óptimas, y la longitud de las cadenas tras aplicarse
@@ -160,10 +164,24 @@ abreviaturas = [chr (127)] + abreviaturas  # Hay que dejar eso como la primera a
 
 hexadecimales = []
 for abreviatura in abreviaturas:
+  cuenta      = 0
   hexadecimal = ''
   for caracter in abreviatura:
-    hexadecimal += hex (ord (caracter))[2:].zfill (2)
+    if ord (caracter) > 127:  # Conversión necesaria
+      try:
+        caracter = daad_a_chr.index (caracter) + 16
+      except:
+        cuenta += 1
+        caracter = ord (caracter)
+    elif caracter == '\n':
+      caracter = ord ('\r')
+    else:
+      caracter = ord (caracter)
+    hexadecimal += hex (caracter)[2:].zfill (2)
   hexadecimales.append (hexadecimal)
+  if cuenta:
+    print ('Error al convertir la abreviatura "%s": tiene %d caracteres que exceden el código 127, pero no salen en daad_a_chr' %
+      (abreviatura, cuenta))
 
 salidaJson = {
   'compression': 'advanced',
