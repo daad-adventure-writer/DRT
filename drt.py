@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-15 -*-
 
 # DAAD Reborn Tokenizer
-# Version 0.2 alpha
+# Version 0.3 alpha
 # Copyright (C) 2010, 2013, 2018-2019 José Manuel Ferrer Ortiz
 #
 # Released under the GPL v2 license
@@ -10,7 +10,9 @@
 # Requires Python 2.6+, optionally with progressbar module
 
 from __future__ import print_function
+import gettext
 import json
+import os
 import sys
 
 try:
@@ -28,6 +30,10 @@ if sys.version_info[0] < 3:  # Python 2
   daad_a_chr = [c.decode ('utf8') for c in daad_a_chr]
 else:
   daad_a_chr = [bytes (c, 'iso-8859-15').decode() for c in daad_a_chr]
+
+gettext.bindtextdomain ('drt', os.path.join (os.path.abspath (os.path.dirname (__file__)), 'locale'))
+gettext.textdomain ('drt')
+_ = gettext.gettext
 
 
 # Calcula y devuelve las abreviaturas óptimas, y la longitud de las cadenas tras aplicarse
@@ -91,7 +97,7 @@ def calcula_abreviaturas (maxAbrev, textos):
   if len (optimas) < num_abreviaturas:
     longDespues += num_abreviaturas - len (optimas)  # Se reemplazarán por abreviaturas de un byte
   if prolijo:
-    print ('Con longitud m\xc3\xa1xima de las abreviaturas %d, longitud de cadenas tras abreviar: %d.' % (maxAbrev, longDespues))
+    print (_('With maximum abbreviation length %(maxAbrev)d, length of texts after compression: %(longDespues)d.') % ({'maxAbrev': maxAbrev, 'longDespues': longDespues}))
     # print (optimas)
   nuevasAbreviaturas = []
   for abreviatura in optimas:
@@ -120,7 +126,7 @@ def cuenta_ocurrencias (cadenas, minAbrev, maxAbrev):
 
 
 if len (sys.argv) < 2 or (len (sys.argv) == 2 and sys.argv[1][0] == '-'):
-  print ('Uso:', sys.argv[0], '<entrada.json> [salida.tok] [-v]')
+  print (_('Usage:'), sys.argv[0], _('<input.json> [output.tok] [-v]'))
   sys.exit()
 
 prolijo = sys.argv[-1] == '-v'
@@ -139,7 +145,7 @@ for tipoTextos in ('messages', 'sysmess', 'locations'):
     textos.append (texto['Text'])
     longCadena  = len (texto['Text']) + 1
     longAntes  += longCadena
-print ('Longitud de los textos sin abreviar (excluyendo objetos):', longAntes)
+print (_('Length of texts without compression (excluding objects):'), longAntes)
 
 longMin = 999999
 if prolijo or not hayProgreso:
@@ -156,11 +162,11 @@ for maxAbrev in rango:
     abreviaturas = posibles  # Conjunto de abreviaturas que produjo la máxima reduccíón
     longMin      = longAbrev  # Reducción máxima de longitud total de textos lograda
     longMax      = maxAbrev   # Longitud máxima en la búsqueda de abreviaturas
-print (longAntes - longMin, 'bytes ahorrados por abreviación de textos')
+print (longAntes - longMin, _('bytes saved from text compression'))
 if prolijo:
   print()
-  print ('La mejor combinación de abreviaturas se encontró con longitud máxima de abreviatura', longMax)
-  print (len (abreviaturas), 'abreviaturas en total, que son:')
+  print (_('The best combination of abbreviations was found with maximum abbreviation length'), longMax)
+  print (len (abreviaturas), _('abbreviations in total, which are:'))
   print (abreviaturas)
 print()
 
@@ -187,8 +193,8 @@ for abreviatura in abreviaturas:
     hexadecimal += hex (caracter)[2:].zfill (2)
   hexadecimales.append (hexadecimal)
   if cuenta:
-    print ('Error al convertir la abreviatura "%s": tiene %d caracteres que exceden el código 127, pero no salen en daad_a_chr' %
-      (abreviatura, cuenta))
+    print (_('Error converting abbreviation "%(abreviatura)s": it has %(cuenta)d characters that exceed code 127, but aren\'t on daad_a_chr') %
+      ({'abreviatura': abreviatura, 'cuenta': cuenta}))
 
 salidaJson = {
   'compression': 'advanced',
@@ -200,4 +206,4 @@ else:
   fichero = open (sys.argv[2], 'w')
   fichero.write (json.dumps (salidaJson))
   fichero.close()
-  print ('Abreviaturas guardadas en:', sys.argv[2])
+  print (_('Abbreviations stored in:'), sys.argv[2])

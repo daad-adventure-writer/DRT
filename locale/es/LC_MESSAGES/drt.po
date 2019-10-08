@@ -1,0 +1,67 @@
+# DAAD Reborn Tokenizer
+# Copyright (C) 2010, 2013, 2018-2019
+# José Manuel Ferrer Ortiz <jmfo1982@gmail.com>
+# This file is distributed under the same license as the drt package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.3 alpha\n"
+"Report-Msgid-Bugs-To: jmfo1982@gmail.com\n"
+"POT-Creation-Date: 2019-10-08 14:55+0800\n"
+"PO-Revision-Date: 2019-10-08 14:58+0800\n"
+"Last-Translator: José Manuel Ferrer Ortiz <jmfo1982@gmail.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: drt.py:100
+#, python-format
+msgid ""
+"With maximum abbreviation length %(maxAbrev)d, length of texts after "
+"compression: %(longDespues)d."
+msgstr ""
+"Con longitud máxima de las abreviaturas %(maxAbrev)d, longitud de cadenas "
+"tras abreviar: %(longDespues)d."
+
+#: drt.py:129
+msgid "<input.json> [output.tok] [-v]"
+msgstr "<entrada.json> [salida.tok] [-v]"
+
+#: drt.py:129
+msgid "Usage:"
+msgstr "Uso:"
+
+#: drt.py:148
+msgid "Length of texts without compression (excluding objects):"
+msgstr "Longitud de los textos sin abreviar (excluyendo objetos):"
+
+#: drt.py:165
+msgid "bytes saved from text compression"
+msgstr "bytes ahorrados por abreviación de textos"
+
+#: drt.py:168
+msgid ""
+"The best combination of abbreviations was found with maximum abbreviation "
+"length"
+msgstr ""
+"La mejor combinación de abreviaturas se encontró con longitud máxima de "
+"abreviatura"
+
+#: drt.py:169
+msgid "abbreviations in total, which are:"
+msgstr "abreviaturas en total, que son:"
+
+#: drt.py:196
+#, python-format
+msgid ""
+"Error converting abbreviation \"%(abreviatura)s\": it has %(cuenta)d "
+"characters that exceed code 127, but aren't on daad_a_chr"
+msgstr ""
+"Error al convertir la abreviatura \"%(abreviatura)s\": tiene %(cuenta)d "
+"caracteres que exceden el código 127, pero no salen en daad_a_chr"
+
+#: drt.py:209
+msgid "Abbreviations stored in:"
+msgstr "Abreviaturas guardadas en:"
