@@ -193,8 +193,8 @@ for abreviatura in abreviaturas:
     hexadecimal += hex (caracter)[2:].zfill (2)
   hexadecimales.append (hexadecimal)
   if cuenta:
-    print (_('Error converting abbreviation "%(abreviatura)s": it has %(cuenta)d characters that exceed code 127, but aren\'t on daad_a_chr') %
-      ({'abreviatura': abreviatura, 'cuenta': cuenta}))
+    print (_('Error converting abbreviation %(abreviatura)s: it has %(cuenta)d characters that exceed code 127, but aren\'t on daad_a_chr') %
+      ({'abreviatura': repr (abreviatura), 'cuenta': cuenta}))
 
 salidaJson = {
   'compression': 'advanced',

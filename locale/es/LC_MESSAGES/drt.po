@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.3 alpha\n"
 "Report-Msgid-Bugs-To: jmfo1982@gmail.com\n"
-"POT-Creation-Date: 2019-10-08 14:55+0800\n"
-"PO-Revision-Date: 2019-10-08 14:58+0800\n"
+"POT-Creation-Date: 2019-11-15 16:47+0800\n"
+"PO-Revision-Date: 2019-11-15 16:50+0800\n"
 "Last-Translator: José Manuel Ferrer Ortiz <jmfo1982@gmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -56,10 +56,10 @@ msgstr "abreviaturas en total, que son:"
 #: drt.py:196
 #, python-format
 msgid ""
-"Error converting abbreviation \"%(abreviatura)s\": it has %(cuenta)d "
+"Error converting abbreviation %(abreviatura)s: it has %(cuenta)d "
 "characters that exceed code 127, but aren't on daad_a_chr"
 msgstr ""
-"Error al convertir la abreviatura \"%(abreviatura)s\": tiene %(cuenta)d "
+"Error al convertir la abreviatura %(abreviatura)s: tiene %(cuenta)d "
 "caracteres que exceden el código 127, pero no salen en daad_a_chr"
 
 #: drt.py:209
