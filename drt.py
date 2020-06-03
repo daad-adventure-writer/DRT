@@ -10,7 +10,7 @@
 
 from __future__ import print_function
 
-version  = '0.4'
+version  = '0.5'
 programa = 'DAAD Reborn Tokenizer ' + version
 
 import argparse
@@ -29,7 +29,9 @@ except:
 num_abreviaturas = 128  # Número máximo de abreviaturas a encontrar
 
 # Tabla de conversión de caracteres, posiciones 16-31 (inclusive)
-daad_a_chr = ('ª', '¡', '¿', '«', '»', 'á', 'é', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'ç', 'Ç', 'ü', 'Ü')
+daad_a_chr = ( 'ª', '¡', '¿', '«', '»', 'á', 'é', 'í', 'ó', 'ú', 
+               'ñ', 'Ñ', 'ç', 'Ç', 'ü', 'Ü', 'à', 'ã', 'õ', 'â', 'ê', 'ô')
+
 if sys.version_info[0] < 3:  # Python 2
   daad_a_chr = [c.decode ('utf8') for c in daad_a_chr]
 else:
@@ -38,7 +40,6 @@ else:
 gettext.bindtextdomain ('drt', os.path.join (os.path.abspath (os.path.dirname (__file__)), 'locale'))
 gettext.textdomain ('drt')
 _ = gettext.gettext
-
 
 # Calcula y devuelve las abreviaturas óptimas, y la longitud de las cadenas tras aplicarse
 # maxAbrev Longitud máxima de las abreviaturas
