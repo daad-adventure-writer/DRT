@@ -28,7 +28,7 @@ except:
 
 num_abreviaturas = 128  # Número máximo de abreviaturas a encontrar
 
-# Tabla de conversión de caracteres, posiciones 16-31 (inclusive)
+# Tabla de conversión de caracteres, posiciones 16-31 (inclusive), para versiones de DRC anteriores a 0.20
 daad_a_chr = ('ª', '¡', '¿', '«', '»', 'á', 'é', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'ç', 'Ç', 'ü', 'Ü')
 if sys.version_info[0] < 3:  # Python 2
   daad_a_chr = [c.decode ('utf8') for c in daad_a_chr]
@@ -168,7 +168,7 @@ for maxAbrev in rango:
   except KeyboardInterrupt:
     break
   if longAbrev < longMin:
-    abreviaturas = posibles  # Conjunto de abreviaturas que produjo la máxima reduccíón
+    abreviaturas = posibles   # Conjunto de abreviaturas que produjo la máxima reduccíón
     longMin      = longAbrev  # Reducción máxima de longitud total de textos lograda
     longMax      = maxAbrev   # Longitud máxima en la búsqueda de abreviaturas
 print (longAntes - longMin, _('bytes saved from text compression'))
@@ -189,7 +189,7 @@ for abreviatura in abreviaturas:
   cuenta      = 0
   hexadecimal = ''
   for caracter in abreviatura:
-    if ord (caracter) > 127:  # Conversión necesaria
+    if ord (caracter) > 127:  # Conversión necesaria en versiones de DRC anteriores a la 0.20
       try:
         caracter = daad_a_chr.index (caracter) + 16
       except:
