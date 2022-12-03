@@ -4,7 +4,7 @@ DAAD Reborn Tokenizer
 
 Finds good abbreviations (tokens) for text compression in DAAD databases, for their usage in DRC (DAAD Reborn Compiler) backend.
 
-It does so by looking for each combination of substrings within the compressible text messages in the database, between a minimum and a maximum substring length, counting the number of occurrences of those substrings within all of those text messages, and picking the ones that seem to provide the biggest savings of disk space as the abbreviations/tokens to use, based on some heuristics (as it's not possible to find the optimum combination of tokens unless using an even more time-consuming brute-force approach).
+It does so by looking for each combination of substrings within the compressible text messages in the database, between a minimum and a maximum substring length, counting the number of occurrences of those substrings within all of those text messages, and picking the ones that seem to provide the biggest savings of disk space as the abbreviations/tokens to use, based on some heuristics (as it's not possible to find the optimum combination of tokens unless using an extremely time-consuming brute-force approach).
 
 
 ## Requirements
