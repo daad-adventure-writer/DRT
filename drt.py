@@ -110,6 +110,9 @@ def calcula_abreviaturas (maxAbrev, textos, compatible):
   return (nuevasAbreviaturas, longDespues)
 
 # Devuelve cuántas veces aparece cada combinación de caracteres en las cadenas dadas, y cuánto se ahorraría por abreviar cada una de ellas
+# cadenas Cadenas de las que contar las ocurrencias
+# minAbrev Longitud mínima de las abreviaturas
+# maxAbrev Longitud máxima de las abreviaturas
 def cuenta_ocurrencias (cadenas, minAbrev, maxAbrev):
   ahorros     = {}  # Cuántos bytes en total se ahorrarían por abreviar cada ocurrencia
   ocurrencias = {}  # Cuántas veces aparece cada combinación de caracteres
