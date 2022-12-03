@@ -26,6 +26,7 @@ It does so by looking for each combination of substrings within the compressible
 
 ### Optional parameters
 
+- `-c`, `--no-compatibility`: disable compatibility with original interpreters.
 - `-l`, `--min-length`: minimum length in characters for the substrings search. By default, their shortest length will be 3 characters long.
 - `-L`, `--max-length`: maximum length in characters for the substrings search. By default, their longest length will be 30 characters long.
 - `-h`, `--help`: show program usage information and quit.

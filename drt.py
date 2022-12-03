@@ -43,7 +43,8 @@ _ = gettext.gettext
 # Calcula y devuelve las abreviaturas óptimas, y la longitud de las cadenas tras aplicarse
 # maxAbrev Longitud máxima de las abreviaturas
 # textos Cadenas sobre las que aplicar abreviaturas
-def calcula_abreviaturas (maxAbrev, textos):
+# compatible Si se aplica compatibilidad con intérpretes originales
+def calcula_abreviaturas (maxAbrev, textos, compatible):
   cadenas     = textos  # Cadenas sobre las que se simulará la aplicación de abreviaturas
   longDespues = 0  # Longitud total de las cadenas tras aplicar abreviaturas, incluyendo espacio de éstas
   minAbrev    = 2  # Longitud mínima de las abreviaturas
@@ -130,6 +131,7 @@ def cuenta_ocurrencias (cadenas, minAbrev, maxAbrev):
 
 
 parser = argparse.ArgumentParser (sys.argv[0], description = programa)
+parser.add_argument ('-c', '--no-compatibility', action = 'store_false', dest = 'compatible', help = _('disable compatibility with original interpreters'))
 parser.add_argument ('-l', '--min-length', metavar = _('MIN_LENGTH'), type = int, help = _('minimum abbreviation length (default: %(default)d)'), default = 3)
 parser.add_argument ('-L', '--max-length', metavar = _('MAX_LENGTH'), type = int, help = _('maximum abbreviation length (default: %(default)d)'), default = 30)
 parser.add_argument ('-v', '--verbose', action = 'store_true', help = _('show additional information'))
@@ -164,7 +166,7 @@ else:
   rango    = progreso (range (args.min_length, args.max_length + 1))
 for maxAbrev in rango:
   try:
-    (posibles, longAbrev) = calcula_abreviaturas (maxAbrev, list (textos))
+    (posibles, longAbrev) = calcula_abreviaturas (maxAbrev, list (textos), args.compatible)
   except KeyboardInterrupt:
     break
   if longAbrev < longMin:
