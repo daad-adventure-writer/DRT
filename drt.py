@@ -52,7 +52,7 @@ def calcula_abreviaturas (maxAbrev, textos, compatible):
   optimas = []  # Abreviaturas óptimas calculadas
   for i in range (num_abreviaturas):
     # Calculamos cuántas veces aparece cada combinación
-    (ahorros, ocurrencias) = cuenta_ocurrencias (cadenas, minAbrev, maxAbrev)
+    (ahorros, ocurrencias) = cuenta_ocurrencias (cadenas, minAbrev, maxAbrev, compatible)
     if not ahorros:  # Ya no hay más cadenas de longitud mínima
       break
     ordenAhorro = sorted (ahorros, key = ahorros.get, reverse = True)
@@ -113,7 +113,8 @@ def calcula_abreviaturas (maxAbrev, textos, compatible):
 # cadenas Cadenas de las que contar las ocurrencias
 # minAbrev Longitud mínima de las abreviaturas
 # maxAbrev Longitud máxima de las abreviaturas
-def cuenta_ocurrencias (cadenas, minAbrev, maxAbrev):
+# compatible Si se aplica compatibilidad con intérpretes originales
+def cuenta_ocurrencias (cadenas, minAbrev, maxAbrev, compatible):
   ahorros     = {}  # Cuántos bytes en total se ahorrarían por abreviar cada ocurrencia
   ocurrencias = {}  # Cuántas veces aparece cada combinación de caracteres
   for cadena in cadenas:
@@ -122,8 +123,10 @@ def cuenta_ocurrencias (cadenas, minAbrev, maxAbrev):
       continue
     for pos in range (0, (longCadena - minAbrev) + 1):
       for longAbrev in range (minAbrev, min (maxAbrev, longCadena - pos) + 1):
-        ahorro     = longAbrev - 1
         ocurrencia = cadena[pos:pos + longAbrev]
+        if compatible and ('_' in ocurrencia or '@' in ocurrencia):
+          break
+        ahorro = longAbrev - 1
         if ocurrencia in ocurrencias:
           ahorros[ocurrencia]     += ahorro
           ocurrencias[ocurrencia] += 1
