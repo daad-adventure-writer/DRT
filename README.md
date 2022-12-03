@@ -29,6 +29,8 @@ It does so by looking for each combination of substrings within the compressible
 - `-c`, `--no-compatibility`: disable compatibility with original interpreters.
 - `-l`, `--min-length`: minimum length in characters for the substrings search. By default, their shortest length will be 3 characters long.
 - `-L`, `--max-length`: maximum length in characters for the substrings search. By default, their longest length will be 30 characters long.
+- `-s`, `--superset-limit`: limit for the superset search heuristic. Try different values for this parameter if you want or need bigger compression savings. The useful value range for this parameter is between 0 and 128, and its default value is 100.
+
 - `-h`, `--help`: show program usage information and quit.
 - `-v`, `--verbose`: activate verbose mode, showing additional information.
 - `-V`, `--version`: show program version and quit.
