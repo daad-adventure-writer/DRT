@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-15 -*-
 
 # DAAD Reborn Tokenizer
-# Copyright (C) 2010, 2013, 2018-2019 José Manuel Ferrer Ortiz
+# Copyright (C) 2010, 2013, 2018-2020, 2022 José Manuel Ferrer Ortiz
 #
 # Released under the GPL v2 license
 #
@@ -10,7 +10,7 @@
 
 from __future__ import print_function
 
-version  = '0.4'
+version  = '0.4.1'
 programa = 'DAAD Reborn Tokenizer ' + version
 
 import argparse
